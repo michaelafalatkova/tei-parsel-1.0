@@ -2,11 +2,11 @@
 
 Authors: Michaela Falátková and Jan Marek
 
-Tei-parser is a python application that transforms the content of TEI document that follows Lombard Press Schema 1.0.0 guidelines (https://lombardpress.org/schema/docs/diplomatic/) into a web presentation. 
+Tei-parser is a Python application that transforms the content of TEI document that follows Lombard Press Schema 1.0.0 guidelines (https://lombardpress.org/schema/docs/diplomatic/) into a web presentation. 
 The web presentation is a static display of pages of the TEI document. Each page contains an image and a transcribed content.
 
 ##  How to use
-0. Install python (miniconda) - Download from https://docs.conda.io/en/latest/miniconda.html
+0. Install Python (Miniconda) - Download from https://docs.conda.io/en/latest/miniconda.html
 1. Setup a specific python environment or use base one 
 2. Clone the repository (or download it), cd to it
 4. Install dependencies
