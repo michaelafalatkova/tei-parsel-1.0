@@ -1,0 +1,16 @@
+atomicwrites==1.4.0
+attrs==21.2.0
+beautifulsoup4==4.9.3
+colorama==0.4.4
+iniconfig==1.1.1
+Jinja2==3.0.1
+lxml==4.6.3
+MarkupSafe==2.0.1
+packaging==21.3
+pluggy==1.0.0
+py==1.11.0
+pyparsing==3.0.6
+pytest==6.2.5
+soupsieve==2.2.1
+toml==0.10.2
+xmltodict==0.12.0

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/theme/">
+      <title>{{header.title}}</title>
+      <!-- Bootstrap core CSS -->
+      <link href="././bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Bootstrap theme -->
+      <link href="././bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+      <!-- Custom styles for this template -->
+      <link href="theme.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+      <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+      <!--[if lt IE 9]>
+      <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+      <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+               <ul class="nav navbar-nav">
+                  <li><a href="#about">Edition</a></li>
+                  <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">Project <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                        <li><a href="#">Introduction</a></li>
+                        <li><a href="#">Editorial Standards</a></li>
+                        <li><a href="#">Project Team</a></li>
+                        <li><a href="#">Bibliography</a></li>
+                        <li><a href="#">Manual</a></li>
+                        <li><a href="#">Technical Documentation</a></li>
+                        <li><a href="#">License</a></li>
+                     </ul>
+               </ul>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+      </nav>
+      <div class="container theme-showcase" role="main">
+         <br/>
+         <!-- Main jumbotron for a primary marketing message or call to action -->
+         <!-- Main jumbotron for a primary marketing message or call to action -->
+         <div class="jumbotron" style="background-color:#fcf8e3;padding-bottom:10px">
+            <p><img src="http://michaelafalatkova.com/demo/logo-eg.jpg" class="float-right w-50 p-3" style="width:20%;"/>
+               <img src="https://www.uhk.cz/img/svg/logo/ff-uhk-en_hor.svg" class="float-right w-50 p-3"
+                  style="float:right;width:30%"/>
+            </p>
+         </div>
+         <div class="page-header">
+            <center>
+               <h2>{{header.author}} - {{header.title}} - {{header.witness}}</h2>
+               <h4>Table of Contents</h4>
+               {% for page in pages %}
+               <a class="" data-toggle="collapse" href="#collapseExample{{ page.get('mark') }}" style="font-size:20px;">{{
+               page.get('mark') }}</a>
+               {% endfor %}
+            </center>
+         </div>
+         <div>
+            <div id="myGroup">
+               {% for page in pages %}
+               <div class="collapse" id="collapseExample{{ page.get('mark') }}">
+                  <div class="row">
+
+                     <div class="col-md-12">
+                        <h3><span class="label label-success">{{ page.get('mark') }}</span></h3>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <img src="{{page.get('link')}}" class="w-50 p-3" style="width:100%"/>
+                           </div>
+                           <div class="col-md-6">
+                              {% for line in page.get('lines') %}
+                              <p>{% for block in line %}
+                                 {% if block.type == 'ref' %}
+                                    {% if block.internal == true %}
+                                     <b> {{block.text}} </b>
+                                    {% else %}
+                                     <a href="{{block.link}}" target="_blank"> {{block.text}} </a>
+                                    {% endif %}
+                                 {% elif block.type == 'quote' %}
+                                 <i> {{block.text}} </i>
+                                 {% elif block.type == 'note' %}
+                                 <span class="label label-success">{{block.number_in_page}}</span>
+
+                                 {% else %}
+                                 {{block.text}}
+                                 {% endif %}
+                                 {% endfor %}
+                              </p>
+                              {% endfor %}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-12" >
+                     {% if page.get('notes')|length > 0 %}
+                     <h1>Editorial contents</h1>
+                     {% endif %}
+                     {% for note in page.get('notes') %}
+                      <span class="label label-success"> {{note.number_in_page}}</span> {{note.text}}<br/>
+                     {% endfor %}
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+             <br/><br/><br/><br/><br/><br/><br/>
+            <div class="well" style="background-image: linear-gradient(to bottom,#fcf8e3 0,#f5f5f5 100%);">
+               <p>Editor: {{header.editor}}</p>
+               <p>License:  <a href="{{header.license.link}}" target="_blank"> {{header.license.text}} </a></p>
+               <p>{{header.declaration}}</p>
+            </div>
+         </div>
+         <!-- /container -->
+      </div>
+      <!-- Bootstrap core JavaScript
+         ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+
+      <script>window.jQuery || document.write('<script src="././bootstrap/js/vendor/jquery.min.js"><\/script>')</script>
+      <script src="././bootstrap/js/bootstrap.min.js"></script>
+      <script src="././bootstrap/js/docs.min.js"></script>
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+        <script type="text/javascript">
+        $('.collapse').on('show.bs.collapse', function () {
+          $('.collapse.in').each(function(){
+              $(this).collapse('hide');
+          });
+        });
+      </script>
+   </body>
+</html>
